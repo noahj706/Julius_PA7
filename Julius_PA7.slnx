@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Julius_PA7/Julius_PA7.vcxproj" />
+  <Project Path="list.test/list.test.vcxproj" />
+</Solution>

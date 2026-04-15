@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{2b24891a-a42b-4e49-a249-40f216b113f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\bin">
+      <UniqueIdentifier>{66fa3fb5-ae46-4955-b40e-d447a0bda498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\common">
+      <UniqueIdentifier>{7200d89c-8fd6-45ab-9119-bc390981303c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\list">
+      <UniqueIdentifier>{3830411b-e6ec-40a3-9a40-1b24c0a8e3dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{dd5907e3-126c-4157-8552-8d9a68885f78}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\bin\main.cpp">
+      <Filter>src\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\list\list.cpp">
+      <Filter>src\list</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\list\list.hpp">
+      <Filter>src\list</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
