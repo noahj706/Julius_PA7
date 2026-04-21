@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Julius_PA7/Julius_PA7.vcxproj" />
-  <Project Path="list.test/list.test.vcxproj" />
+  <Project Path="Julius_PA7/Julius_PA7.vcxproj" Id="ffb91c61-21f9-4a69-a648-1363c9af0519" />
+  <Project Path="list.test/list.test.vcxproj" Id="3a5f95a2-6660-4947-a452-bd0eee516f10" />
 </Solution>

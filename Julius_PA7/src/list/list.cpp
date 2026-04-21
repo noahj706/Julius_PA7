@@ -4,7 +4,8 @@ using std::ostringstream;
 using std::getline;
 using std::istringstream;
 
-data::data(const string& record)//constructor, record format: "recordNumber,ID,name,email,units,program,level"
+//data class defintions
+Data::Data(const string& record)//constructor, record format: "recordNumber,ID,name,email,units,program,level"
 {
 	istringstream instream(record);
 	
@@ -18,7 +19,7 @@ data::data(const string& record)//constructor, record format: "recordNumber,ID,n
 	getline(instream, program, ',');
 	getline(instream, level, ',');
 }
-data::data(const data& other)//copy constructor
+Data::Data(const Data& other)//copy constructor
 {
 	//record copy
 	recordNumber = other.recordNumber;
@@ -38,7 +39,28 @@ data::data(const data& other)//copy constructor
 		temp.pop();
 	}
 }
-void data::writeAbsence()//ups absenceCount and reports today's date to absenceStack
+Data& Data::operator= (const Data& other)//assignment overload
+{
+	//record copy
+	recordNumber = other.recordNumber;
+	ID = other.ID;
+	name = other.name;
+	email = other.email;
+	units = other.units;
+	program = other.program;
+	level = other.level;
+	//absence info copy
+	absenceCount = other.absenceCount;
+	//absenceStack deep copy
+	stack<string> temp = other.absenceStack;
+	while (!temp.empty())
+	{
+		absenceStack.push(temp.top());
+		temp.pop();
+	}
+	return *this;
+}
+void Data::writeAbsence()//ups absenceCount and reports today's date to absenceStack
 {
 	++absenceCount;
 
@@ -53,7 +75,7 @@ void data::writeAbsence()//ups absenceCount and reports today's date to absenceS
 
 	absenceStack.push(outstream.str());
 }
-string data::toCSVString() const//takes all record info and returns as a .csv ready string NOTE: doesn't include absence tracking
+string Data::toCSVString() const//takes all record info and returns as a .csv ready string NOTE: doesn't include absence tracking
 {
 	ostringstream outstream;
 	outstream << recordNumber << ','
@@ -66,7 +88,7 @@ string data::toCSVString() const//takes all record info and returns as a .csv re
 
 	return outstream.str();
 }
-string data::getName() const//returns name as a "firstName lastName" string 
+string Data::getName() const//returns name as a "firstName lastName" string 
 {
 	ostringstream outstream;
 	istringstream instream(name);
@@ -79,15 +101,15 @@ string data::getName() const//returns name as a "firstName lastName" string
 
 	return outstream.str();
 }
-int data::getAbsenceCount() const
+int Data::getAbsenceCount() const
 {
 	return absenceCount;
 }
-string data::getLastAbsenceDate() const
+string Data::getLastAbsenceDate() const
 {
 	return absenceStack.top();
 }
-bool data::deleteAbsence(const string& target)//removes an absence, returns false if passed absence date not found
+bool Data::deleteAbsence(const string& target)//removes an absence, returns false if passed absence date not found
 {
 	stack<string> temp;
 	bool targetFound = false;
@@ -117,3 +139,10 @@ bool data::deleteAbsence(const string& target)//removes an absence, returns fals
 	
 	return targetFound;
 }
+
+//node class defintions
+//templates, look in header..
+
+
+//List class defintions
+//all teamplates, so found in header
