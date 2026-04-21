@@ -27,6 +27,7 @@ class Data
 	stack<string> absenceStack; //stores absence dates (MM/DD/YYYY)
 
 public:
+	Data() = default;//default constructor, will immilpicitly call default string constructors
 	Data(const string& record);//constructor record format: "recordNumber,ID,name,email,units,program,level"
 	Data(const Data& other);//copy constructor
 	~Data() = default;//destructor
@@ -35,7 +36,9 @@ public:
 	void writeAbsence();//ups absenceCount and reports today's date to absenceStack
 
 	string toCSVString() const;//takes all record info and returns as a .csv ready string NOTE: doesn't include absence tracking
+	string absenceStackToCSV() const;//returns a string with absenceStack info for master.csv saving
 	string getName() const;//returns name as a "firstName lastName" string
+	string getID() const;//returns student ID for searching reasons
 	int getAbsenceCount() const;
 	string getLastAbsenceDate() const;
 
@@ -71,7 +74,7 @@ public:
 	{
 		return pNext;
 	}
-	const T& getItem() const
+	T& getItem()
 	{
 		return item;
 	}

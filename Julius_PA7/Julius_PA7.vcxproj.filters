@@ -16,6 +16,12 @@
     <Filter Include="test">
       <UniqueIdentifier>{dd5907e3-126c-4157-8552-8d9a68885f78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\menu">
+      <UniqueIdentifier>{d72f565a-9317-4186-aff0-7b59970e8cd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{ea2d678d-1169-406b-9b23-6d887cc50d8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\bin\main.cpp">
@@ -24,10 +30,24 @@
     <ClCompile Include="src\list\list.cpp">
       <Filter>src\list</Filter>
     </ClCompile>
+    <ClCompile Include="src\menu\menu.cpp">
+      <Filter>src\menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\list\list.hpp">
       <Filter>src\list</Filter>
     </ClInclude>
+    <ClInclude Include="src\menu\menu.hpp">
+      <Filter>src\menu</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\classlist.csv">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="assets\master.csv">
+      <Filter>assets</Filter>
+    </None>
   </ItemGroup>
 </Project>

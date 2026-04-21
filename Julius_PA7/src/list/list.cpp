@@ -18,6 +18,17 @@ Data::Data(const string& record)//constructor, record format: "recordNumber,ID,n
 	getline(instream, units, ',');
 	getline(instream, program, ',');
 	getline(instream, level, ',');
+
+	//parse absence dates if present (master.csv records only)
+	string absenceDate;
+	while (getline(instream, absenceDate, ','))
+	{
+		if (!absenceDate.empty())
+		{
+			absenceStack.push(absenceDate);
+			++absenceCount;
+		}
+	}
 }
 Data::Data(const Data& other)//copy constructor
 {
@@ -32,12 +43,7 @@ Data::Data(const Data& other)//copy constructor
 	//absence info copy
 	absenceCount = other.absenceCount;
 	//absenceStack deep copy
-	stack<string> temp = other.absenceStack;
-	while (!temp.empty()) 
-	{
-		absenceStack.push(temp.top());
-		temp.pop();
-	}
+	absenceStack = other.absenceStack;
 }
 Data& Data::operator= (const Data& other)//assignment overload
 {
@@ -52,12 +58,7 @@ Data& Data::operator= (const Data& other)//assignment overload
 	//absence info copy
 	absenceCount = other.absenceCount;
 	//absenceStack deep copy
-	stack<string> temp = other.absenceStack;
-	while (!temp.empty())
-	{
-		absenceStack.push(temp.top());
-		temp.pop();
-	}
+	absenceStack = other.absenceStack;
 	return *this;
 }
 void Data::writeAbsence()//ups absenceCount and reports today's date to absenceStack
@@ -88,6 +89,38 @@ string Data::toCSVString() const//takes all record info and returns as a .csv re
 
 	return outstream.str();
 }
+string Data::absenceStackToCSV() const //returns absence stack contents as a CSV ready string
+{
+	if (absenceCount == 0)
+	{
+		return "";
+	}
+
+	//flips absenceStack so oldest absence is at top
+	std::stack<string> temp = absenceStack;
+	std::stack<string> reversed;
+
+	while (!temp.empty())
+	{
+		reversed.push(temp.top());
+		temp.pop();
+	}
+
+	//write reversed stack to CSV ready string
+	ostringstream outstream;
+
+	while (!reversed.empty())
+	{
+		outstream << reversed.top();
+		reversed.pop();
+		if (!reversed.empty())
+		{
+			outstream << ',';
+		}
+	}
+
+	return outstream.str();
+}
 string Data::getName() const//returns name as a "firstName lastName" string 
 {
 	ostringstream outstream;
@@ -101,19 +134,25 @@ string Data::getName() const//returns name as a "firstName lastName" string
 
 	return outstream.str();
 }
+string Data::getID() const//returns student ID for searching reasons
+{
+	return ID;
+}
 int Data::getAbsenceCount() const
 {
 	return absenceCount;
 }
 string Data::getLastAbsenceDate() const
 {
-	return absenceStack.top();
+	if (!absenceStack.empty())
+	{
+		return absenceStack.top();
+	}
 }
 bool Data::deleteAbsence(const string& target)//removes an absence, returns false if passed absence date not found
 {
 	stack<string> temp;
 	bool targetFound = false;
-
 
 	//parses absenceStack, discards node that matches target string
 	while (!absenceStack.empty() && !targetFound)
